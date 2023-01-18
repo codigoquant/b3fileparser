@@ -10,5 +10,6 @@ setup(
     author_email='codigoquant@gmail.com',
     license='MIT',
     packages=find_packages(),
-    zip_safe=False
+    zip_safe=False,
+    install_requires=['pandas>=1.5.0']
 )
