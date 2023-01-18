@@ -1,0 +1,9 @@
+build
+dist
+b3fileparser.egg-info
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
