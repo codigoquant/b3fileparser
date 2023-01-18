@@ -1,9 +1,0 @@
-Metadata-Version: 2.1
-Name: b3fileparser
-Version: 0.1
-Summary: A Python parser of B3 historical files.
-Home-page: https://github.com/codigoquant/b3fileparser
-Author: codigoquant
-Author-email: codigoquant@gmail.com
-License: MIT
-License-File: LICENSE
