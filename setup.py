@@ -11,5 +11,5 @@ setup(
     license='MIT',
     packages=find_packages(),
     zip_safe=False,
-    install_requires=['pandas>=1.5.0']
+    install_requires=['pandas>=1.3.0']
 )
