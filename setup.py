@@ -1,4 +1,4 @@
-from setuptools import setup
+from setuptools import setup, find_packages
 
 
 setup(
@@ -9,6 +9,6 @@ setup(
     author='codigoquant',
     author_email='codigoquant@gmail.com',
     license='MIT',
-    packages=['b3fileparser'],
+    packages=find_packages(),
     zip_safe=False
 )
