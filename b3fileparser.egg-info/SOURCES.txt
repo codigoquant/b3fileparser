@@ -1,0 +1,12 @@
+LICENSE
+README.md
+setup.py
+b3fileparser/__init__.py
+b3fileparser/b3_meta_data.py
+b3fileparser/b3fileparser.py
+b3fileparser.egg-info/PKG-INFO
+b3fileparser.egg-info/SOURCES.txt
+b3fileparser.egg-info/dependency_links.txt
+b3fileparser.egg-info/not-zip-safe
+b3fileparser.egg-info/requires.txt
+b3fileparser.egg-info/top_level.txt
