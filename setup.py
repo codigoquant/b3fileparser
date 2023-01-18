@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 setup(
     name='b3fileparser',
     version='0.1',
-    description='A Python parser of B3 historical files',
+    description='A Python parser of B3 historical files.',
     url='https://github.com/codigoquant/b3fileparser',
     author='codigoquant',
     author_email='codigoquant@gmail.com',
