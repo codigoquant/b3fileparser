@@ -2,7 +2,7 @@ import pandas as pd
 #import b3_meta_data
 
 
-def read_b3_file(self, file_name):    
+def read_b3_file(file_name):    
     if not file_name.endswith('TXT'):
         print('Invalid format! Provide a .TXT file ')
         return
