@@ -1,5 +1,5 @@
 build/
-dist/
+dist
 b3fileparser.egg-info
 # Environments
 .env
@@ -7,3 +7,4 @@ b3fileparser.egg-info
 env/
 venv/
 ENV/
+__pycache__
