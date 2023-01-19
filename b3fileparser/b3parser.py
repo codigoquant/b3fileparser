@@ -1,5 +1,5 @@
 import pandas as pd
-import b3_meta_data
+from b3fileparser import b3_meta_data
 
 
 def read_b3_file(file_name):    
