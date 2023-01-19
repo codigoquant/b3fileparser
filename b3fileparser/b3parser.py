@@ -1,5 +1,5 @@
 import pandas as pd
-#import b3_meta_data
+import b3_meta_data
 
 
 def read_b3_file(file_name):    
@@ -26,10 +26,10 @@ def read_b3_file(file_name):
         if col in ["CODIGO_BDI", "PRAZO_EM_DIAS_DO_MERCADO_A_TERMO","NUMERO_DE_DISTRIBUICAO", "FATOR_DE_COTACAO", 'INDICADOR_DE_CORRECAO_DE_PRECOS']:
             b3_data[col] = b3_data[col].fillna(-1).astype(int)
         if col == "TIPO_DE_MERCADO":
-            b3_data[col] = b3_data[col].apply(lambda x: MARKETS[x])        
+            b3_data[col] = b3_data[col].apply(lambda x: b3_meta_data.MARKETS[x])        
         if col == "INDICADOR_DE_CORRECAO_DE_PRECOS":
-            b3_data[col] = b3_data[col].apply(lambda x: INDOPC[x]) 
+            b3_data[col] = b3_data[col].apply(lambda x: b3_meta_data.INDOPC[x]) 
         if col == "CODIGO_BDI":
-            b3_data[col] = b3_data[col].apply(lambda x: CODBDI[x])
+            b3_data[col] = b3_data[col].apply(lambda x: b3_meta_data.CODBDI[x])
     
     return b3_data
