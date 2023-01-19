@@ -9,7 +9,7 @@ def read_b3_file(file_name):
     columns = []
     size_fields = []
 
-    for col, info in META_DATA.items():   
+    for col, info in b3_meta_data.META_DATA.items():   
         columns.append(info['name'])
         size_fields.append(info['size'])
 
