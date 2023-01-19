@@ -1,1 +1,1 @@
-__all__ = ["b3fileparser", "b3_meta_data", "file3"]
+from .b3fileparser import read_b3_file
