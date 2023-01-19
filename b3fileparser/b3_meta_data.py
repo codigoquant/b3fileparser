@@ -1,5 +1,3 @@
-from datetime import datetime
-
 META_DATA = {    
     "TIPREG":{'name':"TIPO_DE_REGISTRO", 'size':2 },
     "DATAPR":{'name':"DATA_DO_PREGAO", 'size':8},
