@@ -1,2 +1,2 @@
-import b3_meta_data
-import b3parser
+from . import b3_meta_data
+from . import b3parser
