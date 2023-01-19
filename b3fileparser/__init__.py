@@ -1,1 +1,1 @@
-from b3fileparser import read_b3_file
+from .b3fileparser import *
