@@ -1,6 +1,7 @@
-
 import pandas as pd
 import b3_meta_data
+
+print(b3_meta_data.CODBDI)
 
 
 def read_b3_file(self, file_name):    
