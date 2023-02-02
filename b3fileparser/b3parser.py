@@ -2,27 +2,33 @@ import pandas as pd
 from b3fileparser import b3_meta_data
 from zipfile import ZipFile
 from io import BytesIO
-
+import os
 
 def read_b3_file(file_name):
-    if file_name.endswith('.ZIP'):
-        file_zip = ZipFile(file_name, mode='r')
-        file_txt = file_zip.read(file_name.replace('.ZIP', '.TXT'))
-        file = BytesIO(file_txt)
-    if file_name.endswith('.TXT'):
-        file = file_name
-    if not (file_name.endswith('TXT') or file_name.endswith('ZIP')):
-        print('Invalid format! Provide a .TXT or .ZIP file containing a .TXT')
-        return
     columns = []
     size_fields = []
-
     for col, info in b3_meta_data.META_DATA.items():
         columns.append(info['name'])
         size_fields.append(info['size'])
 
-    b3_data = pd.read_fwf(file, widths=size_fields,
-                          header=None, names=columns)[1:-1]
+    if not (file_name.endswith('TXT') or file_name.endswith('ZIP')):
+        print('Invalid format! Provide a .TXT or .ZIP file containing a .TXT')
+        return
+    
+    if file_name.endswith('.ZIP'):
+        with ZipFile(file_name, mode='r') as file_zip:                         
+            file_name_txt = os.path.basename(file_name).replace('.ZIP', '.TXT')
+            file = BytesIO(file_zip.read(file_name_txt))                      
+        
+    if file_name.endswith('.TXT'):
+        file = file_name
+   
+    b3_data = pd.read_fwf(
+        file,
+        widths=size_fields,
+        header=None,
+        names=columns
+    )[1:-1]
 
     for col in columns:
         if col.startswith('PRECO') or col.startswith('VOLUME'):

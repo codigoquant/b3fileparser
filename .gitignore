@@ -8,3 +8,4 @@ env/
 venv/
 ENV/
 __pycache__
+.pytest_cache/
