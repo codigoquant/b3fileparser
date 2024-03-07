@@ -27,7 +27,8 @@ def read_b3_file(file_name):
         file,
         widths=size_fields,
         header=None,
-        names=columns
+        names=columns,
+        encoding='latin1'
     )[1:-1]
 
     for col in columns:
