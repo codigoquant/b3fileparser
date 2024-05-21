@@ -4,6 +4,21 @@ from zipfile import ZipFile
 from io import BytesIO
 import os
 
+def _post_processing(df, divide_by_100=True):
+    for col in df.columns:
+        if ('PRECO_' in col or 'VOLUME' in col) and divide_by_100:
+            df[col] = df[col] / 100
+        if 'DATA' in col:
+            df[col] = df[col].apply(lambda x: pd.NaT if x == "99991231" else x )
+            df[col] = pd.to_datetime(df[col])         
+        if col == "TIPO_DE_MERCADO":
+            df[col] = df[col].apply(lambda x: b3_meta_data.MARKETS.get(x, x))
+        if col == "INDICADOR_DE_CORRECAO_DE_PRECOS":
+            df[col] = df[col].apply(lambda x: b3_meta_data.INDOPC.get(x, x))
+        if col == "CODIGO_BDI":
+            df[col] = df[col].apply(lambda x: b3_meta_data.CODBDI.get(x, x))
+    return df
+
 def read_b3_file(file_path, file_type='path'):
     """
     Reads financial data from a Brazilian B3 file, supporting both plaintext and zipped formats.
@@ -33,9 +48,9 @@ def read_b3_file(file_path, file_type='path'):
         raise ValueError("Invalid file_type specified. Choose 'path' or 'bytes'.")
 
     # Prepare columns and their sizes based on metadata
-    columns = [info['name'] for info in b3_meta_data.META_DATA.values()]
-    size_fields = [info['size'] for info in b3_meta_data.META_DATA.values()]
-
+    meta_data = pd.DataFrame(data=b3_meta_data.META_DATA.values())
+    dtypes = {row[1]:row[2] for row in meta_data[['name','dtype']].itertuples()}
+    
     # Handle file input based on type
     if file_type == 'path':
         if not file_path.lower().endswith(('.txt', '.zip')):
@@ -55,25 +70,13 @@ def read_b3_file(file_path, file_type='path'):
     # Read and parse the file
     b3_data = pd.read_fwf(
         file,
-        widths=size_fields,
         header=None,
-        names=columns,
-        encoding='latin1'
+        names=meta_data['name'].to_list(),
+        widths=meta_data['size'].to_list(),
+        dtype=dtypes,        
+        encoding='latin1',
     )[1:-1]  # Skip potential header and footer rows
 
     # Post-process the data
-    for col in columns:
-        if 'PRECO' in col or 'VOLUME' in col:
-            b3_data[col] = b3_data[col] / 100
-        if 'DATA' in col:
-            b3_data[col] = pd.to_datetime(b3_data[col], errors='coerce')
-        if col in ["CODIGO_BDI", "PRAZO_EM_DIAS_DO_MERCADO_A_TERMO", "NUMERO_DE_DISTRIBUICAO", "FATOR_DE_COTACAO", 'INDICADOR_DE_CORRECAO_DE_PRECOS']:
-            b3_data[col] = b3_data[col].fillna(-1).astype(int)
-        if col == "TIPO_DE_MERCADO":
-            b3_data[col] = b3_data[col].apply(lambda x: b3_meta_data.MARKETS.get(x, "unknown"))
-        if col == "INDICADOR_DE_CORRECAO_DE_PRECOS":
-            b3_data[col] = b3_data[col].apply(lambda x: b3_meta_data.INDOPC.get(x, "unknown"))
-        if col == "CODIGO_BDI":
-            b3_data[col] = b3_data[col].apply(lambda x: b3_meta_data.CODBDI.get(x, "unknown"))
-
+    b3_data = _post_processing(b3_data)    
     return b3_data
