@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "b3fileparser"
-version = "0.1.6"
+version = "0.2.0"
 description = "A Python parser of Brazilian exchange B3 historical data files"
 authors = ["codigoquant <codigoquant@gmail.com>"]
 license = "MIT"
@@ -9,6 +9,7 @@ readme = "README.md"
 [tool.poetry.dependencies]
 python = "^3.10"
 pandas = "^2.0"
+polars = "^0.20.29"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.2.1"

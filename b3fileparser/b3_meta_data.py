@@ -1,5 +1,5 @@
 META_DATA = {    
-    "TIPREG":{'name':"TIPO_DE_REGISTRO", 'size':2, 'dtype':'category'},
+    "TIPREG":{'name':"TIPO_DE_REGISTRO", 'size':2, 'dtype':'object'},
     "DATAPR":{'name':"DATA_DO_PREGAO", 'size':8, 'dtype': 'object'},
     "CODBDI":{'name':"CODIGO_BDI", 'size':2, 'dtype':'category'},
     "CODNEG":{'name':"CODIGO_DE_NEGOCIACAO",'size':12,'dtype':'category'},
