@@ -21,7 +21,11 @@ dados_b3 = parser.read_b3_file('COTAHIST_A2023.TXT')
 dados_b3
 ```
 
-`dados_b3` é um DataFrame pandas:
+> [!NOTE]
+> Pode-se obter os dados em formato DataFrame `Pandas` ou `Polars`
+> Configure engine para `engine='pandas'` ou `engine='polars'`
+
+`dados_b3` é um DataFrame:
 
 |     | TIPO_DE_REGISTRO | DATA_DO_PREGAO      | CODIGO_BDI          | CODIGO_DE_NEGOCIACAO | TIPO_DE_MERCADO | NOME_DA_EMPRESA | ESPECIFICACAO_DO_PAPEL | PRAZO_EM_DIAS_DO_MERCADO_A_TERMO | MOEDA_DE_REFERENCIA | PRECO_DE_ABERTURA | PRECO_MAXIMO | PRECO_MINIMO | PRECO_MEDIO | PRECO_ULTIMO_NEGOCIO | PRECO_MELHOR_OFERTA_DE_COMPRA | PRECO_MELHOR_OFERTA_DE_VENDAS | NUMERO_DE_NEGOCIOS | QUANTIDADE_NEGOCIADA | VOLUME_TOTAL_NEGOCIADO | PRECO_DE_EXERCICIO | INDICADOR_DE_CORRECAO_DE_PRECOS | DATA_DE_VENCIMENTO | FATOR_DE_COTACAO | PRECO_DE_EXERCICIO_EM_PONTOS | CODIGO_ISIN  | NUMERO_DE_DISTRIBUICAO |
 | --: | ---------------: | :------------------ | :------------------ | :------------------- | :-------------- | :-------------- | :--------------------- | -------------------------------: | :------------------ | ----------------: | -----------: | -----------: | ----------: | -------------------: | ----------------------------: | ----------------------------: | -----------------: | -------------------: | ---------------------: | -----------------: | ------------------------------: | :----------------- | ---------------: | ---------------------------: | :----------- | ---------------------: |

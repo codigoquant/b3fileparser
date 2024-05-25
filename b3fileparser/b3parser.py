@@ -22,9 +22,11 @@ class B3Parser():
     """        
 
     @staticmethod    
-    def create_parser(engine: str) -> B3ParserBase:
+    def create_parser(engine: str = "pandas") -> B3ParserBase:
         if engine == 'pandas':
             return B3ParserPandas()
         elif engine == 'polars':
-            return B3ParserPolars()
+            return B3ParserPolars()            
+        else:
+            raise Exception("engine parameter must be 'pandas' or 'polars'")
         
