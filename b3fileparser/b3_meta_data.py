@@ -1,32 +1,75 @@
-META_DATA = {    
-    "TIPREG":{'name':"TIPO_DE_REGISTRO", 'size':2, 'dtype':'object'},
-    "DATAPR":{'name':"DATA_DO_PREGAO", 'size':8, 'dtype': 'object'},
-    "CODBDI":{'name':"CODIGO_BDI", 'size':2, 'dtype':'category'},
-    "CODNEG":{'name':"CODIGO_DE_NEGOCIACAO",'size':12,'dtype':'category'},
-    "TPMERC":{'name':"TIPO_DE_MERCADO",'size':3, 'dtype':'category'},
-    "NOMRES":{'name':"NOME_DA_EMPRESA",'size':12, 'dtype':'category'},
-    "ESPECI":{'name':"ESPECIFICACAO_DO_PAPEL",'size':10, 'dtype':'category'},
-    "PRAZOT":{'name':"PRAZO_EM_DIAS_DO_MERCADO_A_TERMO",'size':3, 'dtype':'object'},
-    "MODREF":{'name':"MOEDA_DE_REFERENCIA",'size':4, 'dtype':'category'},
-    "PREABE":{'name':"PRECO_DE_ABERTURA",'size':13, 'dtype': 'float32'},
-    "PREMAX":{'name':"PRECO_MAXIMO",'size':13, 'dtype': 'float32'},
-    "PREMIN":{'name':"PRECO_MINIMO",'size':13, 'dtype': 'float32'},
-    "PREMED":{'name':"PRECO_MEDIO",'size':13, 'dtype': 'float32'},
-    "PREULT":{'name':"PRECO_ULTIMO_NEGOCIO",'size':13, 'dtype': 'float32'},
-    "PREOFC":{'name':"PRECO_MELHOR_OFERTA_DE_COMPRA",'size':13, 'dtype': 'float32'},
-    "PREOFV":{'name':"PRECO_MELHOR_OFERTA_DE_VENDAS",'size':13, 'dtype': 'float32'},
-    "TOTNEG":{'name':"NUMERO_DE_NEGOCIOS",'size':5, 'dtype':'object'},
-    "QUATOT":{'name':"QUANTIDADE_NEGOCIADA",'size':18, 'dtype':'object'},
-    "VOLTOT":{'name':"VOLUME_TOTAL_NEGOCIADO",'size':18, 'dtype': 'float64'},
-    "PREEXE":{'name':"PRECO_DE_EXERCICIO",'size':13, 'dtype': 'float32'},
-    "INDOPC":{'name':"INDICADOR_DE_CORRECAO_DE_PRECOS",'size':1, 'dtype':'category'},
-    "DATVEN":{'name':"DATA_DE_VENCIMENTO",'size':8, 'dtype':'object'},
-    "FATCOT":{'name':"FATOR_DE_COTACAO",'size':7, 'dtype':'category'},
-    "PTOEXE":{'name':"PRECO_DE_EXERCICIO_EM_PONTOS",'size':13, 'dtype': 'float32'},
-    "CODISI":{'name':"CODIGO_ISIN",'size':12, 'dtype':'category'},
-    "DISMES":{'name':"NUMERO_DE_DISTRIBUICAO",'size':3, 'dtype':'category'}
+FIELD_SIZES = {
+    'TIPO_DE_REGISTRO': 2,
+    'DATA_DO_PREGAO': 8,
+    'CODIGO_BDI': 2,
+    'CODIGO_DE_NEGOCIACAO': 12,
+    'TIPO_DE_MERCADO': 3,
+    'NOME_DA_EMPRESA': 12,
+    'ESPECIFICACAO_DO_PAPEL': 10,
+    'PRAZO_EM_DIAS_DO_MERCADO_A_TERMO': 3,
+    'MOEDA_DE_REFERENCIA': 4,
+    'PRECO_DE_ABERTURA': 13,
+    'PRECO_MAXIMO': 13,
+    'PRECO_MINIMO': 13,
+    'PRECO_MEDIO': 13,
+    'PRECO_ULTIMO_NEGOCIO': 13,
+    'PRECO_MELHOR_OFERTA_DE_COMPRA': 13,
+    'PRECO_MELHOR_OFERTA_DE_VENDAS': 13,
+    'NUMERO_DE_NEGOCIOS': 5,
+    'QUANTIDADE_NEGOCIADA': 18,
+    'VOLUME_TOTAL_NEGOCIADO': 18,
+    'PRECO_DE_EXERCICIO': 13,
+    'INDICADOR_DE_CORRECAO_DE_PRECOS': 1,
+    'DATA_DE_VENCIMENTO': 8,
+    'FATOR_DE_COTACAO': 7,
+    'PRECO_DE_EXERCICIO_EM_PONTOS': 13,
+    'CODIGO_ISIN': 12,
+    'NUMERO_DE_DISTRIBUICAO': 3
 }
 
+DATE_COLUMNS = (
+    "DATA_DO_PREGAO",
+    "DATA_DE_VENCIMENTO"
+)
+
+FLOAT32_COLUMNS = (
+    'PRECO_DE_ABERTURA',
+    'PRECO_MAXIMO',
+    'PRECO_MINIMO',
+    'PRECO_MEDIO',
+    'PRECO_ULTIMO_NEGOCIO',
+    'PRECO_MELHOR_OFERTA_DE_COMPRA',
+    'PRECO_MELHOR_OFERTA_DE_VENDAS',
+    'PRECO_DE_EXERCICIO',
+    'PRECO_DE_EXERCICIO_EM_PONTOS',    
+)
+
+FLOAT64_COLUMNS = (
+    "VOLUME_TOTAL_NEGOCIADO",
+    "QUANTIDADE_NEGOCIADA"
+)
+
+UINT32_COLUMNS = (
+    "FATOR_DE_COTACAO",
+    "PRAZO_EM_DIAS_DO_MERCADO_A_TERMO",
+    "NUMERO_DE_NEGOCIOS",
+    "NUMERO_DE_DISTRIBUICAO",
+    'TIPO_DE_REGISTRO', 
+)
+
+STRING_COLUMNS = (
+    "CODIGO_DE_NEGOCIACAO",
+    "NOME_DA_EMPRESA",
+    "CODIGO_ISIN"
+)
+
+CATEGORY_COLUMNS = (
+    "INDICADOR_DE_CORRECAO_DE_PRECOS", 
+    'TIPO_DE_MERCADO', 
+    'CODIGO_BDI', 
+    "MOEDA_DE_REFERENCIA",
+    "ESPECIFICACAO_DO_PAPEL"
+)
 
 MARKETS = {
     '010':'VISTA',
