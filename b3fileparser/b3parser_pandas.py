@@ -1,5 +1,6 @@
-from .b3parser_base import B3ParserBase
+from b3fileparser.b3parser_base import B3ParserBase
 import pandas as pd
+import b3fileparser.b3_meta_data as meta_data
 
 
 class B3ParserPandas(B3ParserBase):
@@ -27,35 +28,25 @@ class B3ParserPandas(B3ParserBase):
             # Read data from bytes
             df = read_b3_file(b'raw binary data from file', file_type='bytes')
         """
-        meta_data = super()._load_meta_data()
         file = super()._load_file(file_path, file_type)        
 
         # Read and parse the file
-        b3_data = pd.read_fwf(
+        df = pd.read_fwf(
             file,
             header=None,
-            names=meta_data['names'],
-            widths=meta_data['sizes'],
-            dtype=meta_data['dtypes'],        
+            names=list(meta_data.FIELD_SIZES.keys()),
+            widths=list(meta_data.FIELD_SIZES.values()),
             encoding='latin1',
         )[1:-1]  # Skip potential header and footer rows
-
-        # Post-process the data
-        b3_data = self._post_processing(b3_data, meta_data)    
-        return b3_data
-    
-    def _post_processing(self, df, meta_data):
-        for col in df.columns:
-            if ('PRECO_' in col or 'VOLUME' in col):
-                df[col] = df[col] / 100
-            if 'DATA' in col:
+        
+        df["TIPO_DE_MERCADO"] = df["TIPO_DE_MERCADO"].apply(lambda x: meta_data.MARKETS.get(x, x))
+        df["INDICADOR_DE_CORRECAO_DE_PRECOS"] = df["INDICADOR_DE_CORRECAO_DE_PRECOS"].apply(lambda x: meta_data.INDOPC.get(x, x))
+        df["CODIGO_BDI"] = df["CODIGO_BDI"].apply(lambda x: meta_data.CODBDI.get(x, x))
+        for col in meta_data.FLOAT32_COLUMNS: df[col] = df[col].astype(float) / 100
+        for col in meta_data.FLOAT64_COLUMNS: df[col] = df[col].astype(float)
+        for col in meta_data.DATE_COLUMNS:            
                 df[col] = df[col].apply(lambda x: pd.NaT if x == "99991231" else x )
-                df[col] = pd.to_datetime(df[col])         
-            if col == "TIPO_DE_MERCADO":
-                df[col] = df[col].apply(lambda x: meta_data["MARKETS"].get(x, x))
-            if col == "INDICADOR_DE_CORRECAO_DE_PRECOS":
-                df[col] = df[col].apply(lambda x: meta_data["INDOPC"].get(x, x))
-            if col == "CODIGO_BDI":
-                df[col] = df[col].apply(lambda x: meta_data["CODBDI"].get(x, x))
+                df[col] = pd.to_datetime(df[col])
+
         return df
 

@@ -6,13 +6,10 @@ import os
 import pandas as pd
 import polars as pl
 
-from b3fileparser import b3_meta_data
-
 
 class B3ParserBase(ABC):
     def __init__(self) -> None:
-        super().__init__()
-        
+        super().__init__()        
     
     @abstractmethod
     def read_b3_file(file_path: str, file_type: str) -> pd.DataFrame | pl.DataFrame: 
@@ -61,21 +58,3 @@ class B3ParserBase(ABC):
         elif file_type == 'bytes':
             file = BytesIO(file_path)
         return file
-    
-    @staticmethod    
-    def _load_meta_data() -> Dict:    
-        names, sizes,   = [], []
-        dtypes = {}
-        for v in b3_meta_data.META_DATA.values():
-            names.append(v["name"])
-            sizes.append(v["size"])
-            dtypes.update({v["name"]:v["dtype"]})
-
-        return {
-            "names": names,
-            "sizes": sizes,
-            "dtypes": dtypes,
-            "MARKETS": b3_meta_data.MARKETS,
-            "INDOPC": b3_meta_data.INDOPC,
-            "CODBDI": b3_meta_data.CODBDI,
-        }
